@@ -5,7 +5,11 @@ const cors = require("cors");
 const {botTelegram} = require("./bot/BotTelegram.js");
 const { getAllCoinHttp } = require("./controller/CoinController/CoinController.js");
 const { getAllCoinGekoHttp } = require("./controller/CoinGekoController/CoinGekoController.js");
-const PORT = 3001;
+const PORT = 8080;
+
+http.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 app.use(cors());
 app.use(express.json());
