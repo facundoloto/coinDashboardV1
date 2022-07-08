@@ -29,7 +29,7 @@ const getAllCoinGeko = async () => {
       {
         name: "maker",
         coins: await searchCoinApiGeko(maker.data.tickers),
-        maximumDifference: await maximumDifferenceGeko1(aave.data.tickers),
+        maximumDifference: await maximumDifferenceGeko(aave.data.tickers),
       },
   ];
 
