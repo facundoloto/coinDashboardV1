@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 setInterval(async () => {
   await botTelegram(); //get data from api
-  }, 300000);
+  }, 60000);
 //routes
 app.get("/", getAllCoinHttp); //it's to get all coins only one time beacuse after we'll send data with socket.io
 app.get("/geko",getAllCoinGekoHttp); //it's to get all coins only one time beacuse after we'll send data with socket.io
