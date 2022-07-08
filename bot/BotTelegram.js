@@ -3,9 +3,10 @@ const { Telegraf } = require("telegraf");
 const {
   getAllCoin,
 } = require("../controller/CoinController/CoinController.js");
-const id = process.env.ES_CHAT_ID;
-
+const bot = new Telegraf(process.env.TOKEN_TELEGRAM_API);
+const id = process.env.ES_ID;
 async function botTelegram() {
+
   try {
     let coin = [];
     let data;
@@ -26,12 +27,11 @@ async function botTelegram() {
     data.sort((a, b) => {
       return b.maximumDifference - a.maximumDifference;
     });
-
-    const bot = new Telegraf(process.env.TOKEN_TELEGRAM_API);
-
-    await bot.telegram.sendMessage(
-      id,
-      `*top 1*` +
+    
+    try {
+      await bot.telegram.sendMessage(
+        id,
+        `*top 1*` +
         "```" +
         `**${data[0].name}**` +
         "```" +
@@ -41,39 +41,43 @@ async function botTelegram() {
         "```" +
         `+${data[0].maximumDifference}%` +
         "```",
-      { parse_mode: "Markdown" }
-    );
+        { parse_mode: "Markdown" }
+      );
 
-    await bot.telegram.sendMessage(
+      await bot.telegram.sendMessage(
         id,
         `*top 2*` +
-          "```" +
-          `**${data[1].name}**` +
-          "```" +
-          `${data[1].marketPriceHight}` +
-          ">" +
-          `${data[1].marketPriceLow}` +
-          "```" +
-          `+${data[1].maximumDifference}%` +
-          "```",
+        "```" +
+        `**${data[1].name}**` +
+        "```" +
+        `${data[1].marketPriceHight}` +
+        ">" +
+        `${data[1].marketPriceLow}` +
+        "```" +
+        `+${data[1].maximumDifference}%` +
+        "```",
         { parse_mode: "Markdown" }
       );
 
       await bot.telegram.sendMessage(
         id,
         `*top 3*` +
-          "```" +
-          `**${data[0].name}**` +
-          "```" +
-          `${data[0].marketPriceHight}` +
-          ">" +
-          `${data[0].marketPriceLow}` +
-          "```" +
-          `+${data[0].maximumDifference}%` +
-          "```",
+        "```" +
+        `**${data[2].name}**` +
+        "```" +
+        `${data[2].marketPriceHight}` +
+        ">" +
+        `${data[2].marketPriceLow}` +
+        "```" +
+        `+${data[2].maximumDifference}%` +
+        "```",
         { parse_mode: "Markdown" }
       );
 
+      bot.launch();
+    } catch (error) {
+      console.log(error);
+    }
   } catch (error) {
     console.log(error);
   }
