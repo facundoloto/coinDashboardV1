@@ -12,6 +12,10 @@ async function searchCoin(coins) {
         });
       }
 
+    });
+
+    await coins.data.data.map(function (coins) { //Filter coins in different markets and targets in usdt
+
       if (coins.exchangeId === "kucoin" && coins.quoteSymbol === "USDT") {
         coin.push({
           market: coins.exchangeId,
@@ -19,7 +23,11 @@ async function searchCoin(coins) {
           date: coins.updated,
         });
       }
-      
+
+    });
+
+    await coins.data.data.map(function (coins) { //Filter coins in different markets and targets in usdt
+
       if (coins.exchangeId === "gate" && coins.quoteSymbol === "USDT") {
         coin.push({
           market: coins.exchangeId+"IO",
@@ -29,6 +37,7 @@ async function searchCoin(coins) {
       }
 
     });
+
   }
 
   return coin;
