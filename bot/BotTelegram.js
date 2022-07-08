@@ -3,8 +3,8 @@ const { Telegraf } = require("telegraf");
 const {
   getAllCoin,
 } = require("../controller/CoinController/CoinController.js");
-const bot = new Telegraf(process.env.TOKEN_TELEGRAM_API);
-const id = process.env.ES_ID;
+const bot = new Telegraf("5199627189:AAEe0I5JO7R2Z0pP8i_zB7hwPx1T_nssHQg");
+
 async function botTelegram() {
 
   try {
@@ -29,6 +29,7 @@ async function botTelegram() {
     });
     
     try {
+      const id = 1183249684;
       await bot.telegram.sendMessage(
         id,
         `*top 1*` +
