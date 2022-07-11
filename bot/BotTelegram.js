@@ -3,7 +3,7 @@ const { Telegraf } = require("telegraf");
 const {
   getAllCoin,
 } = require("../controller/CoinController/CoinController.js");
-const bot = new Telegraf("5199627189:AAEe0I5JO7R2Z0pP8i_zB7hwPx1T_nssHQg");
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 async function botTelegram() {
 
@@ -29,51 +29,24 @@ async function botTelegram() {
     });
     
     try {
-      const id = 1183249684;
-      await bot.telegram.sendMessage(
-        id,
-        `*top 1*` +
-        "```" +
-        `**${data[0].name}**` +
-        "```" +
-        `${data[0].marketPriceHight}` +
-        ">" +
-        `${data[0].marketPriceLow}` +
-        "```" +
-        `+${data[0].maximumDifference}%` +
-        "```",
-        { parse_mode: "Markdown" }
-      );
+      const id = process.env.ID_CHAT;
+      await bot.telegram.sendMessage(id,"**top 1**");
+      await bot.telegram.sendMessage(id, `*${data[0].name}*`);
+      await bot.telegram.sendMessage(id,`"marketPriceHight:" ${data[0].marketPriceLow}*`);
+      await bot.telegram.sendMessage(id,`"marketPriceLow:" ${data[0].marketPriceLow}*`);
+      await bot.telegram.sendMessage(id,`"maximumDifference:" "+${data[0].percentageMarketDiffLow}%"`);
+   
+      await bot.telegram.sendMessage(id,"**top 2**");
+      await bot.telegram.sendMessage(id, `*${data[1].name}*`);
+      await bot.telegram.sendMessage(id,`"marketPriceHight:" ${data[1].marketPriceLow}*`);
+      await bot.telegram.sendMessage(id,`"marketPriceLow:" ${data[1].marketPriceLow}*`);
+      await bot.telegram.sendMessage(id,`"maximumDifference:" "+${data[1].percentageMarketDiffLow}%"`);
 
-      await bot.telegram.sendMessage(
-        id,
-        `*top 2*` +
-        "```" +
-        `**${data[1].name}**` +
-        "```" +
-        `${data[1].marketPriceHight}` +
-        ">" +
-        `${data[1].marketPriceLow}` +
-        "```" +
-        `+${data[1].maximumDifference}%` +
-        "```",
-        { parse_mode: "Markdown" }
-      );
-
-      await bot.telegram.sendMessage(
-        id,
-        `*top 3*` +
-        "```" +
-        `**${data[2].name}**` +
-        "```" +
-        `${data[2].marketPriceHight}` +
-        ">" +
-        `${data[2].marketPriceLow}` +
-        "```" +
-        `+${data[2].maximumDifference}%` +
-        "```",
-        { parse_mode: "Markdown" }
-      );
+      await bot.telegram.sendMessage(id,"**top 3**");
+      await bot.telegram.sendMessage(id, `*${data[2].name}*`);
+      await bot.telegram.sendMessage(id,`"marketPriceHight:" ${data[2].marketPriceLow}*`);
+      await bot.telegram.sendMessage(id,`"marketPriceLow:" ${data[2].marketPriceLow}*`);
+      await bot.telegram.sendMessage(id,`"maximumDifference:" "+${data[2].percentageMarketDiffLow}%"`);
 
       bot.launch();
     } catch (error) {
