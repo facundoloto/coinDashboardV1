@@ -30,23 +30,20 @@ async function botTelegram() {
     
     try {
       
-      await bot.telegram.sendMessage(id,"*top 1*",{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id, `*${data[0].name}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"marketPriceHight:"*${data[0].marketPriceHight}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"marketPriceLow:"*${data[0].marketPriceLow}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"maximumDifference:" "*+${data[0].maximumDifference}%*"`,{ parse_mode: "Markdown" });
-   
-      await bot.telegram.sendMessage(id,"*top 2*",{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id, `*${data[1].name}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"marketPriceHight: "*${data[1].marketPriceHight}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"marketPriceLow: "*${data[1].marketPriceLow}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"maximumDifference: "*+${data[1].maximumDifference}%*"`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*top 1*: ${data[0].name}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*marketPriceHight*: ${data[0].marketPriceHight}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*marketPriceLow*: ${data[0].marketPriceLow}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*maximumDifference*: +${data[0].maximumDifference}%`,{ parse_mode: "Markdown" });
+      
+      await bot.telegram.sendMessage(id,`*top 2*:${data[1].name}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*marketPriceHight*: ${data[1].marketPriceHight}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*marketPriceLow*: ${data[1].marketPriceLow}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*maximumDifference*: +${data[1].maximumDifference}%`,{ parse_mode: "Markdown" });
 
-      await bot.telegram.sendMessage(id,"*top 3*",{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id, `*${data[2].name}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"marketPriceHight: "*${data[2].marketPriceHight}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"marketPriceLow: "*${data[2].marketPriceLow}*`,{ parse_mode: "Markdown" });
-      await bot.telegram.sendMessage(id,`"maximumDifference:" "*+${data[2].maximumDifference}%*"`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*top 1*: ${data[2].name}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*marketPriceHight*: ${data[2].marketPriceHight}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*marketPriceLow*: ${data[2].marketPriceLow}`,{ parse_mode: "Markdown" });
+      await bot.telegram.sendMessage(id,`*maximumDifference*: +${data[2].maximumDifference}%`,{ parse_mode: "Markdown" });
 
       bot.launch();
     } catch (error) {
