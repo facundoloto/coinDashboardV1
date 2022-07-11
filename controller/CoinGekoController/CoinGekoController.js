@@ -18,17 +18,17 @@ const getAllCoinGeko = async () => {
     const data = [
       {
         name: "aave",
-        coins: await searchCoinApiGeko(aave.data.tickers),
+        data: await searchCoinApiGeko(aave.data.tickers),
         maximumDifference: await maximumDifferenceGeko(aave.data.tickers),
       },
        {
         name: "klay",
-        coins: await searchCoinApiGeko(klay.data.tickers),
+        data: await searchCoinApiGeko(klay.data.tickers),
         maximumDifference: await maximumDifferenceGeko(aave.data.tickers),
       },
       {
         name: "maker",
-        coins: await searchCoinApiGeko(maker.data.tickers),
+        data: await searchCoinApiGeko(maker.data.tickers),
         maximumDifference: await maximumDifferenceGeko(aave.data.tickers),
       },
   ];
