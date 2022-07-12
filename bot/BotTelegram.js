@@ -3,8 +3,8 @@ const { Telegraf } = require("telegraf");
 const { getAllCoinGeko} = require("../controller/CoinGekoController/CoinGekoController.js");
 const bot = new Telegraf("5199627189:AAEe0I5JO7R2Z0pP8i_zB7hwPx1T_nssHQg");
 const id = 558301870;
-async function botTelegram() {
 
+async function botTelegram() {
   try {
 
     let coin = [];
