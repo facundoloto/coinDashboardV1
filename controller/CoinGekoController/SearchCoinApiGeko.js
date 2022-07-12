@@ -14,7 +14,7 @@ async function searchCoinApiGeko(coin) { //search coin in array and return the p
   
       if (tickers.market.name === "Gate.io" && tickers.target === "USDT") {
         coins.push({
-          market: "gate.io",
+          market: "gateIO",
           price: tickers.last,
           date:tickers.last_fetch_at
         });

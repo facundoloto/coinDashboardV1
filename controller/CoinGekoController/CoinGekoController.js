@@ -1,39 +1,30 @@
 const axios = require("axios");
 const { OK, INTERNAL_SERVER_ERROR } = require("../../constants/httpCodes");
-const { maximumDifferenceGeko } = require("./MaximumDifferenceGeko.js");
 const { searchCoinApiGeko } = require("./SearchCoinApiGeko");
+const { maximumDifferenceGeko } = require("./MaximumDifferenceGeko.js");
+
 
 const getAllCoinGeko = async () => {
   try {
-    const aave = await axios(
-      `https://api.coingecko.com/api/v3/coins/aave/tickers`
-    );
-    const klay = await axios(
-      `https://api.coingecko.com/api/v3/coins/klay-token/tickers`
-    );
-    const maker = await axios(
-      `https://api.coingecko.com/api/v3/coins/maker/tickers`
-    );
+    const coins = ["aave", "maker", "the-graph", "kusama", "zilliqa", "waves", "neo", "quant-network", "dash"];
+    
+    const response = async (coins) => {
+      const data = [];
+      for (let i = 0; i < coins.length; i++) {
+        const res = await axios.get("https://pro-api.coingecko.com/api/v3/coins/" + coins[i] + "/tickers?x_cg_pro_api_key=CG-1Xcb8LwXVcZVdgQp3VpqDjfs");
+        data.push(
+          {
+            name: coins[i],
+            data: await searchCoinApiGeko(res.data.tickers),
+            maximumDifference: await maximumDifferenceGeko(res.data.tickers),
+          }
+        );
+      }
+      return data;
+    };
 
-    const data = [
-      {
-        name: "aave",
-        data: await searchCoinApiGeko(aave.data.tickers),
-        maximumDifference: await maximumDifferenceGeko(aave.data.tickers),
-      },
-       {
-        name: "klay",
-        data: await searchCoinApiGeko(klay.data.tickers),
-        maximumDifference: await maximumDifferenceGeko(aave.data.tickers),
-      },
-      {
-        name: "maker",
-        data: await searchCoinApiGeko(maker.data.tickers),
-        maximumDifference: await maximumDifferenceGeko(aave.data.tickers),
-      },
-  ];
+    return await response(coins);
 
-    return data;
   } catch (error) {
     console.log(error);
   }
@@ -45,9 +36,9 @@ async function getAllCoinGekoHttp(req, res) {
     res.status(OK).send(data);
   } catch (error) {
     console.log(error);
-    res.status(INTERNAL_SERVER_ERROR).send({
+    res.status(204).send({
       msg: "there is an error with the server,try later",
     });
   }
 }
-module.exports = { getAllCoinGekoHttp };
+module.exports = { getAllCoinGeko, getAllCoinGekoHttp };

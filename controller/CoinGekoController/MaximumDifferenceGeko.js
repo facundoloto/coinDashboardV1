@@ -6,6 +6,7 @@ function maxDiff(num1, num2) {
 }
 
 async function maximumDifferenceGeko(coins) {
+
   let coin = [];
   let percentageMaxDiff;
   let maxPrice;
@@ -29,7 +30,7 @@ async function maximumDifferenceGeko(coins) {
 
     if (tickers.market.name === "Gate.io" && tickers.target === "USDT") {
       coin.push({
-        market: "gate.io",
+        market: "gateIO",
         price: tickers.last,
       });
     }
