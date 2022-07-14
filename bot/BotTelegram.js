@@ -43,8 +43,6 @@ async function botTelegram() {
     +${data[2].maximumDifference}%
      `, { parse_mode: "Markdown" });
 
-    bot.launch();
-
   } catch (error) {
     console.log(error);
   }
