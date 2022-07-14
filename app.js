@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-/*try {
+try {
 setInterval(async () => {
   try {
     await botTelegram(); //get data from api to send on telegram
@@ -25,7 +25,7 @@ setInterval(async () => {
 } catch (error) {
   console.log(error);
 }
-*/
+
 //routes
 app.get("/", getAllCoinGekoHttp); //it's to get all coins only one time beacuse after we'll send data with socket.io
 
