@@ -5,11 +5,10 @@ const id = process.env.ID_CHAT;
 
 async function botTelegram() {
   try {
-
     let coin = [];
     let data;
     const res = await getAllCoinGeko();
-console.log(res)
+
     res.map((res) => {
       coin.push({
         name: res.name,
