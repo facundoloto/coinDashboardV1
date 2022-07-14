@@ -26,7 +26,7 @@ async function botTelegram() {
       return b.maximumDifference - a.maximumDifference;
     });
 
-    const bot = new Telegraf("5199627189:AAEe0I5JO7R2Z0pP8i_zB7hwPx1T_nssHQg");
+    const bot = new Telegraf("5199627189:AAHmc6M7GbsYYjO0HwrhCcJ3RGfVgEKRXOE");
     await bot.telegram.sendMessage(id, `top de las monedas con operaciones más rentables detectadas en las ultimos 2 minutos `, { parse_mode: "Markdown" });
     await bot.telegram.sendMessage(id,
       `
