@@ -5,29 +5,34 @@ const { maximumDifferenceGeko } = require("./MaximumDifferenceGeko.js");
 
 
 const getAllCoinGeko = async () => {
-  try {
-    const coins = ["aave", "maker", "the-graph", "kusama", "zilliqa", "waves", "neo", "quant-network", "dash"];
-    
-    const response = async (coins) => {
-      const data = [];
-      for (let i = 0; i < coins.length; i++) {
+
+  const coins = ["aave", "maker", "the-graph", "kusama", "zilliqa", "waves", "neo", "quant-network", "dash"];
+
+  const response = async (coins) => {
+    const data = [];
+
+    for (let i = 0; i < coins.length; i++) {
+      try {
         const res = await axios.get("https://pro-api.coingecko.com/api/v3/coins/" + coins[i] + "/tickers?x_cg_pro_api_key=CG-1Xcb8LwXVcZVdgQp3VpqDjfs");
+        
         data.push(
           {
             name: coins[i],
-            data: await searchCoinApiGeko(res.data.tickers),
-            maximumDifference: await maximumDifferenceGeko(res.data.tickers),
+            data: await searchCoinApiGeko(res.data.tickers), //it's a function to filter data in different markets and targets in usdt 
+            maximumDifference: await maximumDifferenceGeko(res.data.tickers), //it's a function to do the calculation of the maximum difference between the price of the coin in different markets
           }
         );
+      } catch (error) {
+        console.log(error);
       }
-      return data;
-    };
+    }
 
-    return await response(coins);
+    return data;
+  };
 
-  } catch (error) {
-    console.log(error);
-  }
+  let data = await response(coins);
+
+  return data;
 };
 
 async function getAllCoinGekoHttp(req, res) {
@@ -36,9 +41,11 @@ async function getAllCoinGekoHttp(req, res) {
     res.status(OK).send(data);
   } catch (error) {
     console.log(error);
-    res.status(204).send({
+    res.status(INTERNAL_SERVER_ERROR).send({
       msg: "there is an error with the server,try later",
     });
+
   }
 }
+
 module.exports = { getAllCoinGeko, getAllCoinGekoHttp };

@@ -6,7 +6,7 @@ function maxDiff(num1, num2) {
 }
 
 async function maximumDifferenceGeko(coins) {
-
+  try {
   let coin = [];
   let percentageMaxDiff;
   let maxPrice;
@@ -37,6 +37,7 @@ async function maximumDifferenceGeko(coins) {
 
   });
 
+
   maxPrice = [...coin]; //copy the array
   minPrice = [...coin];
   maxPrice.sort((a, b) => b.price - a.price);
@@ -51,6 +52,9 @@ async function maximumDifferenceGeko(coins) {
   };
 
   return percentageMaxDiff;
+} catch (error) {
+  console.log(error);
+};
 }
 
 module.exports = { maximumDifferenceGeko };

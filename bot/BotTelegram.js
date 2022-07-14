@@ -1,8 +1,7 @@
 require("dotenv").config();
 const { Telegraf } = require("telegraf");
-const { getAllCoinGeko} = require("../controller/CoinGekoController/CoinGekoController.js");
-const bot = new Telegraf("5199627189:AAEe0I5JO7R2Z0pP8i_zB7hwPx1T_nssHQg");
-const id = 558301870;
+const { getAllCoinGeko } = require("../controller/CoinGekoController/CoinGekoController.js");
+const id = process.env.ID_CHAT;
 
 async function botTelegram() {
   try {
@@ -10,8 +9,8 @@ async function botTelegram() {
     let coin = [];
     let data;
     const res = await getAllCoinGeko();
-
-      res.map((res) => {
+console.log(res)
+    res.map((res) => {
       coin.push({
         name: res.name,
         marketPriceHight: res.maximumDifference.marketPriceHight,
@@ -28,11 +27,10 @@ async function botTelegram() {
       return b.maximumDifference - a.maximumDifference;
     });
 
-    try {
-
+    const bot = new Telegraf(process.env.BOT_TOKEN);
     await bot.telegram.sendMessage(id, `top de las monedas con operaciones más rentables detectadas en las ultimos 2 minutos `, { parse_mode: "Markdown" });
-    await bot.telegram.sendMessage(id, 
-   `
+    await bot.telegram.sendMessage(id,
+      `
     1-*${data[0].name}*
       ${data[0].marketPriceHight}>${data[0].marketPriceLow}
      +${data[0].maximumDifference}%
@@ -46,11 +44,7 @@ async function botTelegram() {
     +${data[2].maximumDifference}%
      `, { parse_mode: "Markdown" });
 
-      bot.launch();
-      
-    } catch (error) {
-      console.log(error);
-    }
+    bot.launch();
 
   } catch (error) {
     console.log(error);
